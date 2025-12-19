@@ -1,6 +1,7 @@
 """Professional Workflow API endpoints"""
 from fastapi import APIRouter, HTTPException
 from typing import List
+from pydantic import BaseModel
 import logging
 
 from app.models.schemas import BatchProcessingRequest, DocumentComparison
@@ -12,6 +13,14 @@ router = APIRouter()
 # Initialize engines
 batch_engine = BatchProcessingEngine()
 comparison_engine = DocumentComparisonEngine()
+
+
+class DocumentComparisonRequest(BaseModel):
+    """Request model for document comparison"""
+    doc_a_text: str
+    doc_b_text: str
+    doc_a_id: str = "doc_a"
+    doc_b_id: str = "doc_b"
 
 
 @router.post("/batch-process")
@@ -41,25 +50,20 @@ async def batch_process_documents(request: BatchProcessingRequest):
 
 
 @router.post("/compare")
-async def compare_documents(
-    doc_a_text: str,
-    doc_b_text: str,
-    doc_a_id: str = "doc_a",
-    doc_b_id: str = "doc_b"
-):
+async def compare_documents(request: DocumentComparisonRequest):
     """
     Compare two documents with detailed redlining and legal analysis.
     
     Designed for contract negotiation workflows.
     """
     try:
-        logger.info(f"Comparing documents {doc_a_id} and {doc_b_id}")
+        logger.info(f"Comparing documents {request.doc_a_id} and {request.doc_b_id}")
         
         result = await comparison_engine.compare_documents(
-            doc_a_text=doc_a_text,
-            doc_b_text=doc_b_text,
-            doc_a_id=doc_a_id,
-            doc_b_id=doc_b_id
+            doc_a_text=request.doc_a_text,
+            doc_b_text=request.doc_b_text,
+            doc_a_id=request.doc_a_id,
+            doc_b_id=request.doc_b_id
         )
         
         return result

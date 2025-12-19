@@ -47,7 +47,7 @@ def test_compare_documents(client, sample_document_text):
     
     response = client.post(
         "/api/workflow/compare",
-        params={
+        json={
             "doc_a_text": doc_a,
             "doc_b_text": doc_b,
             "doc_a_id": "original",

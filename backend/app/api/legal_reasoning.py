@@ -1,6 +1,7 @@
 """Legal Reasoning API endpoints"""
 from fastapi import APIRouter, HTTPException
 from typing import List
+from pydantic import BaseModel
 import logging
 
 from app.models.schemas import ArgumentAnalysis, PrecedentAnalysis
@@ -12,6 +13,13 @@ router = APIRouter()
 # Initialize engines
 syllogism_engine = SyllogisticAnalysisEngine()
 precedent_engine = PrecedentEvaluationEngine()
+
+
+class PrecedentEvaluationRequest(BaseModel):
+    """Request model for precedent evaluation"""
+    case_citation: str
+    current_facts: List[str]
+    jurisdiction: str
 
 
 @router.post("/analyze-argument", response_model=ArgumentAnalysis)
@@ -40,23 +48,19 @@ async def analyze_argument(
 
 
 @router.post("/evaluate-precedent", response_model=PrecedentAnalysis)
-async def evaluate_precedent(
-    case_citation: str,
-    current_facts: List[str],
-    jurisdiction: str
-):
+async def evaluate_precedent(request: PrecedentEvaluationRequest):
     """
     Evaluate precedent applicability and binding authority.
     
     Analyzes case holding, key facts, and determines applicability to current matter.
     """
     try:
-        logger.info(f"Evaluating precedent: {case_citation}")
+        logger.info(f"Evaluating precedent: {request.case_citation}")
         
         result = await precedent_engine.evaluate_precedent(
-            case_citation=case_citation,
-            current_facts=current_facts,
-            jurisdiction=jurisdiction
+            case_citation=request.case_citation,
+            current_facts=request.current_facts,
+            jurisdiction=request.jurisdiction
         )
         
         return result

@@ -1,6 +1,7 @@
 """Court Admissibility API endpoints"""
 from fastapi import APIRouter, HTTPException
 from typing import Dict, Any
+from pydantic import BaseModel
 import logging
 
 from app.models.schemas import CourtAdmissibleReport
@@ -14,26 +15,29 @@ certification_engine = ReportCertificationEngine()
 citation_validator = CitationValidator()
 
 
-@router.post("/generate-report", response_model=CourtAdmissibleReport)
-async def generate_court_report(
-    analysis_data: Dict[str, Any],
-    case_title: str,
-    jurisdiction: str,
+class ReportGenerationRequest(BaseModel):
+    """Request model for report generation"""
+    analysis_data: Dict[str, Any]
+    case_title: str
+    jurisdiction: str
     report_type: str = "analysis"
-):
+
+
+@router.post("/generate-report", response_model=CourtAdmissibleReport)
+async def generate_court_report(request: ReportGenerationRequest):
     """
     Generate court-admissible report with proper certification.
     
     Ensures report meets court admissibility standards.
     """
     try:
-        logger.info(f"Generating court report for {case_title}")
+        logger.info(f"Generating court report for {request.case_title}")
         
         report = await certification_engine.generate_court_report(
-            analysis_data=analysis_data,
-            case_title=case_title,
-            jurisdiction=jurisdiction,
-            report_type=report_type
+            analysis_data=request.analysis_data,
+            case_title=request.case_title,
+            jurisdiction=request.jurisdiction,
+            report_type=request.report_type
         )
         
         return report
@@ -68,24 +72,27 @@ async def validate_citation(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.post("/format-citation")
-async def format_citation(
-    citation_parts: Dict[str, str],
-    citation_type: str,
+class CitationFormattingRequest(BaseModel):
+    """Request model for citation formatting"""
+    citation_parts: Dict[str, str]
+    citation_type: str
     format_style: str = "bluebook"
-):
+
+
+@router.post("/format-citation")
+async def format_citation(request: CitationFormattingRequest):
     """
     Format citation according to specified style.
     
     Supports Bluebook, ALWD, and court-specific formats.
     """
     try:
-        logger.info(f"Formatting {citation_type} citation")
+        logger.info(f"Formatting {request.citation_type} citation")
         
         formatted = citation_validator.format_citation(
-            citation_parts=citation_parts,
-            citation_type=citation_type,
-            format_style=format_style
+            citation_parts=request.citation_parts,
+            citation_type=request.citation_type,
+            format_style=request.format_style
         )
         
         return {"formatted_citation": formatted}

@@ -154,7 +154,7 @@ function DocumentInterpreter() {
                       </ul>
                     </div>
                   )}
-                  <div className="confidence-badge confidence-{clause.confidence}">
+                  <div className={`confidence-badge confidence-${clause.confidence}`}>
                     Confidence: {clause.confidence.toUpperCase()}
                   </div>
                 </div>
