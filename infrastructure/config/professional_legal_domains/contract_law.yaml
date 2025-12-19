@@ -1,0 +1,64 @@
+# Contract Law Legal Domain Configuration
+# Professional legal analysis configuration for contract law practice
+
+domain:
+  name: "Contract Law"
+  jurisdiction: "multi-state"
+  practice_area: "contract_law"
+
+analysis_focus:
+  - binding_obligations
+  - consideration
+  - capacity
+  - legality
+  - mutual_assent
+  - statute_of_frauds
+  - parol_evidence
+  - contract_interpretation
+
+key_authorities:
+  primary:
+    - "Restatement (Second) of Contracts"
+    - "Uniform Commercial Code (UCC)"
+  secondary:
+    - "Williston on Contracts"
+    - "Corbin on Contracts"
+
+clause_types:
+  - integration_clause
+  - force_majeure
+  - indemnification
+  - warranties
+  - representations
+  - conditions_precedent
+  - termination_provisions
+  - dispute_resolution
+  - choice_of_law
+  - choice_of_forum
+
+interpretation_principles:
+  - plain_meaning_rule
+  - contra_proferentem
+  - ejusdem_generis
+  - expressio_unius
+  - noscitur_a_sociis
+
+risk_factors:
+  high:
+    - "Ambiguous material terms"
+    - "Missing consideration"
+    - "Capacity issues"
+    - "Statute of frauds non-compliance"
+  medium:
+    - "Unclear dispute resolution"
+    - "Missing force majeure"
+    - "Weak indemnification"
+  low:
+    - "Boilerplate variation"
+    - "Minor drafting inconsistencies"
+
+professional_standards:
+  review_depth: "comprehensive"
+  nuance_preservation: true
+  citation_required: true
+  confidence_threshold: 0.7
