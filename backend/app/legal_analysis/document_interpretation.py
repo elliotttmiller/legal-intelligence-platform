@@ -41,6 +41,8 @@ class DocumentInterpretationEngine:
         Returns:
             DocumentInterpretation with complete professional analysis
         """
+        import uuid
+        
         logger.info(f"Starting interpretation for {document_type} document")
         
         # Extract and analyze clauses with legal precision
@@ -71,7 +73,7 @@ class DocumentInterpretationEngine:
         overall_confidence = self._calculate_confidence(clauses)
         
         return DocumentInterpretation(
-            document_id=f"doc_{datetime.utcnow().timestamp()}",
+            document_id=str(uuid.uuid4()),
             document_type=document_type,
             executive_summary=executive_summary,
             key_legal_issues=key_issues,

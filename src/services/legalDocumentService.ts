@@ -39,11 +39,7 @@ export const legalDocumentService = {
     formData.append('file', file)
     formData.append('document_type', documentType)
 
-    const response = await axios.post(`${API_BASE}/upload-interpret`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    const response = await axios.post(`${API_BASE}/upload-interpret`, formData)
     return response.data
   },
 

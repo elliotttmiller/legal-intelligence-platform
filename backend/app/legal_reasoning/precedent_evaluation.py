@@ -10,6 +10,9 @@ logger = logging.getLogger(__name__)
 class PrecedentEvaluationEngine:
     """Evaluates precedent strength and applicability to current matter"""
     
+    # Configuration constants
+    DISTINGUISHING_FACTOR_REDUCTION = 0.1  # Reduction per distinguishing factor
+    
     async def evaluate_precedent(
         self,
         case_citation: str,
@@ -109,6 +112,6 @@ class PrecedentEvaluationEngine:
         base_score = 0.7 if binding else 0.5
         
         # Reduce score for each distinguishing factor
-        reduction = len(distinguishing_factors) * 0.1
+        reduction = len(distinguishing_factors) * self.DISTINGUISHING_FACTOR_REDUCTION
         
         return max(0.0, min(1.0, base_score - reduction))

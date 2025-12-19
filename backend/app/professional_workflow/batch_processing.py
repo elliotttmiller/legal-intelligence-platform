@@ -56,13 +56,13 @@ class BatchProcessingEngine:
         processing_time = (end_time - start_time).total_seconds() / 3600  # hours
         
         # Estimate manual review time (15 min per document minimum)
-        manual_time = len(document_texts) * 0.25
+        manual_time = max(len(document_texts) * 0.25, 0.1)  # Minimum 0.1 hours
         
         results["workflow_metrics"] = WorkflowMetrics(
             task_type=f"batch_{analysis_type}",
             manual_time_estimate=manual_time,
             automated_time=processing_time,
-            time_savings_percentage=((manual_time - processing_time) / manual_time) * 100
+            time_savings_percentage=((manual_time - processing_time) / manual_time) * 100 if manual_time > 0 else 0.0
         )
         
         return results
