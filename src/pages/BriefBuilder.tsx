@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, FileText, CheckCircle, Scale } from 'lucide-react'
+import { ArrowLeft, CheckCircle, Scale } from 'lucide-react'
 import './BriefBuilder.css'
 
 /**

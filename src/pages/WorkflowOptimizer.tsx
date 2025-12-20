@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, TrendingUp, Clock, Target, Upload, FileText } from 'lucide-react'
+import { ArrowLeft, TrendingUp, Clock, Target, Upload } from 'lucide-react'
 import './WorkflowOptimizer.css'
 
 /**

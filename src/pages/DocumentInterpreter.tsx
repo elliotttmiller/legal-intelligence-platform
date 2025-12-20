@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Upload, FileText, AlertCircle, CheckCircle } from 'lucide-react'
+import { ArrowLeft, Upload, AlertCircle, CheckCircle } from 'lucide-react'
 import { legalDocumentService } from '@/services/legalDocumentService'
 import { DocumentType, DocumentInterpretation } from '@/types'
 import './DocumentInterpreter.css'

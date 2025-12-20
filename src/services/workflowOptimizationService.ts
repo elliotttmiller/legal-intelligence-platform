@@ -2,7 +2,7 @@
  * Professional workflow optimization service
  */
 import axios from 'axios'
-import { DocumentComparison, WorkflowMetrics } from '@/types'
+import { DocumentComparison } from '@/types'
 
 const API_BASE = '/api/workflow'
 
