@@ -52,6 +52,11 @@ class LegalTextParser:
     Uses regex patterns and heuristics optimized for legal documents.
     """
     
+    # Configuration constants
+    MIN_PARAGRAPH_LENGTH = 20  # Minimum characters for valid paragraph
+    MAX_PARTIES_TO_EXTRACT = 10  # Maximum number of party names to extract
+    MAX_SECTION_CONTENT_LINES = 20  # Lines to read for section content
+    
     # Common legal document section patterns
     SECTION_PATTERNS = [
         # Roman numerals: I., II., III.
@@ -179,7 +184,7 @@ class LegalTextParser:
                     
                     # Collect section content (simplified - would need more sophisticated logic)
                     content_lines = []
-                    for j in range(i + 1, min(i + 20, len(lines))):
+                    for j in range(i + 1, min(i + self.MAX_SECTION_CONTENT_LINES, len(lines))):
                         if self._is_section_header(lines[j].strip()):
                             break
                         content_lines.append(lines[j])
@@ -257,7 +262,7 @@ class LegalTextParser:
         cleaned_paragraphs = []
         for para in paragraphs:
             para = para.strip()
-            if para and len(para) > 20:  # Minimum length for valid paragraph
+            if para and len(para) > self.MIN_PARAGRAPH_LENGTH:
                 cleaned_paragraphs.append(para)
         
         logger.info(f"Extracted {len(cleaned_paragraphs)} paragraphs")
@@ -297,4 +302,4 @@ class LegalTextParser:
             parties.append(plaintiff.strip())
             parties.append(defendant.strip())
         
-        return list(set(parties))[:10]  # Limit to first 10 unique parties
+        return list(set(parties))[:self.MAX_PARTIES_TO_EXTRACT]
