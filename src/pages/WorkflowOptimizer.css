@@ -1,0 +1,362 @@
+.workflow-container {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+.workflow-header {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  border-bottom: 1px solid var(--border-default);
+  color: var(--text-primary);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.workflow-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+  pointer-events: none;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  transition: all var(--transition-fast);
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+
+.back-link:hover {
+  color: var(--accent-primary);
+  transform: translateX(-4px);
+}
+
+.workflow-header h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.workflow-header p {
+  color: var(--text-secondary);
+  font-size: 1.0625rem;
+  position: relative;
+  z-index: 1;
+}
+
+.workflow-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+.metrics-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  animation: slideIn var(--transition-base) ease-out;
+}
+
+.metric-card {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: all var(--transition-base);
+  animation: scaleIn var(--transition-slow) ease-out;
+  animation-fill-mode: both;
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card:nth-child(1) { animation-delay: 0ms; }
+.metric-card:nth-child(2) { animation-delay: 100ms; }
+.metric-card:nth-child(3) { animation-delay: 200ms; }
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transition: left var(--transition-slow);
+}
+
+.metric-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--border-strong);
+}
+
+.metric-card:hover::before {
+  left: 100%;
+}
+
+.metric-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.metric-icon svg {
+  filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.1));
+}
+
+.metric-value {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--accent-primary);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.metric-label {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.workflow-card {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+  transition: all var(--transition-base);
+}
+
+.workflow-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-default);
+}
+
+.workflow-card h2 {
+  font-size: 1.625rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.workflow-card p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.workflow-button {
+  padding: 1rem 2rem;
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md);
+}
+
+.workflow-button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.workflow-button.secondary {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+}
+
+.workflow-button.secondary:hover {
+  background: var(--bg-elevated);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.insights-card {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-md);
+}
+
+.insights-card h2 {
+  font-size: 1.625rem;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.insight-item {
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+  border-left: 4px solid;
+  transition: all var(--transition-fast);
+}
+
+.insight-item:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.insight-item.success {
+  background: rgba(74, 222, 128, 0.1);
+  border-color: var(--success);
+}
+
+.insight-item.warning {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: var(--warning);
+}
+
+.insight-item.info {
+  background: rgba(96, 165, 250, 0.1);
+  border-color: var(--info);
+}
+
+.insight-item strong {
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 1.0625rem;
+}
+
+.insight-item p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.comparison-section {
+  margin-top: 2rem;
+}
+
+.file-upload-area {
+  padding: 2.5rem;
+  border: 2px dashed var(--border-default);
+  border-radius: 12px;
+  text-align: center;
+  background: var(--bg-primary);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+
+.file-upload-area:hover {
+  border-color: var(--accent-primary);
+  background: var(--bg-secondary);
+  transform: translateY(-2px);
+}
+
+.file-upload-area svg {
+  color: var(--text-tertiary);
+  margin-bottom: 1rem;
+  transition: all var(--transition-base);
+}
+
+.file-upload-area:hover svg {
+  color: var(--accent-primary);
+  transform: scale(1.1);
+}
+
+.file-upload-area p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.batch-processing-section {
+  margin-bottom: 2rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.stat-item {
+  padding: 1.25rem;
+  background: var(--bg-primary);
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+
+.stat-item:hover {
+  border-color: var(--border-default);
+  transform: translateY(-2px);
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .workflow-header {
+    padding: 2rem 1.5rem;
+  }
+
+  .workflow-main {
+    padding: 2rem 1rem;
+  }
+
+  .metrics-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-card {
+    padding: 1.75rem;
+  }
+
+  .button-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
