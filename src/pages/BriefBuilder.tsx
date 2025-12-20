@@ -1,84 +1,111 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, FileText } from 'lucide-react'
+import { ArrowLeft, CheckCircle, Scale } from 'lucide-react'
+import './BriefBuilder.css'
 
 /**
  * Brief Builder - Legal brief construction assistant
  */
+
+// Mock analysis data
+const mockAnalysis = {
+  overallStrength: 82,
+  syllogisms: [
+    {
+      major: 'All evidence obtained in violation of the Fourth Amendment is inadmissible in criminal prosecutions (Mapp v. Ohio).',
+      minor: 'The evidence in this case was obtained without a valid warrant and without exigent circumstances.',
+      conclusion: 'Therefore, the evidence must be suppressed and is inadmissible at trial.'
+    }
+  ],
+  strengths: [
+    'Strong precedential support from binding Supreme Court authority',
+    'Clear chain of legal reasoning with well-established major premise',
+    'Factual pattern closely aligns with controlling case law',
+    'Multiple supporting authorities strengthen the argument'
+  ],
+  weaknesses: [
+    'Opposing counsel may argue good faith exception applies',
+    'Recent circuit split on similar fact patterns could create uncertainty',
+    'Need to address potential distinguishing factors more thoroughly'
+  ],
+  suggestions: [
+    'Add analysis of recent Supreme Court decisions on digital searches',
+    'Strengthen minor premise with more detailed factual development',
+    'Include preemptive counter-arguments to good faith exception',
+    'Consider adding alternative arguments based on state constitutional grounds'
+  ]
+}
+
 function BriefBuilder() {
+  const [briefType, setBriefType] = useState('motion-dismiss')
+  const [argument, setArgument] = useState('')
+  const [showAnalysis, setShowAnalysis] = useState(false)
+
+  const handleAnalyze = () => {
+    if (argument.trim()) {
+      setShowAnalysis(true)
+    }
+  }
+
   return (
-    <div style={{ minHeight: '100vh', background: '#f9fafb' }}>
-      <header style={{
-        background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
-        color: 'white',
-        padding: '2rem',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-      }}>
-        <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'white', textDecoration: 'none', marginBottom: '1rem' }}>
+    <div className="brief-container">
+      <header className="brief-header">
+        <Link to="/" className="back-link">
           <ArrowLeft size={24} />
           Back to Dashboard
         </Link>
-        <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Brief Builder</h1>
-        <p style={{ opacity: 0.9 }}>Legal brief construction with argument strength analysis</p>
+        <h1>Brief Builder</h1>
+        <p>Legal brief construction with argument strength analysis</p>
       </header>
 
-      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
-        <div style={{ background: 'white', padding: '2rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)' }}>
+      <main className="brief-main">
+        {/* Builder Form */}
+        <div className="builder-card">
           <h2>Construct Legal Brief</h2>
           
-          <div style={{ marginTop: '1.5rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>Brief Type:</label>
-            <select style={{
-              width: '100%',
-              padding: '0.75rem',
-              border: '1px solid #d1d5db',
-              borderRadius: '6px',
-              fontSize: '1rem'
-            }}>
-              <option>Motion to Dismiss</option>
-              <option>Summary Judgment Brief</option>
-              <option>Appellate Brief</option>
-              <option>Trial Brief</option>
-              <option>Memorandum of Law</option>
+          <div className="form-group">
+            <label htmlFor="brief-type">Brief Type:</label>
+            <select
+              id="brief-type"
+              className="form-select"
+              value={briefType}
+              onChange={(e) => setBriefType(e.target.value)}
+            >
+              <option value="motion-dismiss">Motion to Dismiss</option>
+              <option value="summary-judgment">Summary Judgment Brief</option>
+              <option value="appellate">Appellate Brief</option>
+              <option value="trial">Trial Brief</option>
+              <option value="memorandum">Memorandum of Law</option>
+              <option value="opposition">Opposition Brief</option>
             </select>
           </div>
 
-          <div style={{ marginTop: '1.5rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>Legal Argument:</label>
+          <div className="form-group">
+            <label htmlFor="legal-argument">Legal Argument:</label>
             <textarea
-              placeholder="Enter your legal argument..."
-              style={{
-                width: '100%',
-                minHeight: '200px',
-                padding: '0.75rem',
-                border: '1px solid #d1d5db',
-                borderRadius: '6px',
-                fontSize: '1rem',
-                fontFamily: 'inherit'
-              }}
+              id="legal-argument"
+              className="form-textarea"
+              placeholder="Enter your legal argument...
+
+Example:
+The evidence obtained during the search of defendant's vehicle must be suppressed. The Fourth Amendment protects against unreasonable searches and seizures. Here, law enforcement conducted a warrantless search without probable cause or exigent circumstances. Under Mapp v. Ohio, evidence obtained in violation of the Fourth Amendment is inadmissible. Therefore, the court should grant the motion to suppress."
+              value={argument}
+              onChange={(e) => setArgument(e.target.value)}
             />
           </div>
 
-          <button style={{
-            marginTop: '1.5rem',
-            padding: '1rem 2rem',
-            background: '#2563eb',
-            color: 'white',
-            border: 'none',
-            borderRadius: '6px',
-            fontSize: '1rem',
-            fontWeight: 600,
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem'
-          }}>
-            <FileText size={20} />
+          <button
+            className="analyze-button"
+            onClick={handleAnalyze}
+            disabled={!argument.trim()}
+          >
+            <Scale size={20} />
             Analyze Argument Strength
           </button>
 
-          <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f0f9ff', borderRadius: '8px' }}>
+          <div className="features-card">
             <h3>Brief Builder Features:</h3>
-            <ul style={{ marginTop: '1rem', paddingLeft: '1.5rem' }}>
+            <ul className="features-list">
               <li>Syllogistic argument structure analysis</li>
               <li>Identification of major and minor premises</li>
               <li>Logical coherence assessment</li>
@@ -88,6 +115,76 @@ function BriefBuilder() {
             </ul>
           </div>
         </div>
+
+        {/* Analysis Results */}
+        {showAnalysis && (
+          <div className="analysis-section">
+            <div className="analysis-header">
+              <CheckCircle size={32} />
+              <h2>Argument Analysis Complete</h2>
+            </div>
+
+            {/* Overall Strength */}
+            <div className="analysis-card">
+              <h3>Overall Argument Strength</h3>
+              <div className="strength-score">
+                <div className="score-value">{mockAnalysis.overallStrength}%</div>
+                <div className="score-label">Strong argument with solid precedential support</div>
+              </div>
+            </div>
+
+            {/* Syllogistic Analysis */}
+            <div className="analysis-card">
+              <h3>Syllogistic Structure</h3>
+              {mockAnalysis.syllogisms.map((syllogism, index) => (
+                <div key={index} className="syllogism-item">
+                  <div className="syllogism-part">
+                    <div className="syllogism-label">Major Premise</div>
+                    <div className="syllogism-text">{syllogism.major}</div>
+                  </div>
+                  <div className="syllogism-part">
+                    <div className="syllogism-label">Minor Premise</div>
+                    <div className="syllogism-text">{syllogism.minor}</div>
+                  </div>
+                  <div className="syllogism-part">
+                    <div className="syllogism-label">Conclusion</div>
+                    <div className="syllogism-text">{syllogism.conclusion}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Strengths */}
+            <div className="analysis-card">
+              <h3>Argument Strengths</h3>
+              <ul className="analysis-list strengths">
+                {mockAnalysis.strengths.map((strength, index) => (
+                  <li key={index}>{strength}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Weaknesses */}
+            <div className="analysis-card">
+              <h3>Potential Weaknesses</h3>
+              <ul className="analysis-list weaknesses">
+                {mockAnalysis.weaknesses.map((weakness, index) => (
+                  <li key={index}>{weakness}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Improvement Suggestions */}
+            <div className="analysis-card">
+              <h3>Improvement Suggestions</h3>
+              <ul className="analysis-list suggestions">
+                {mockAnalysis.suggestions.map((suggestion, index) => (
+                  <li key={index}>{suggestion}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   )

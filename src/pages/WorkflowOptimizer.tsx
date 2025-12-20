@@ -1,119 +1,139 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, TrendingUp, Clock, Target } from 'lucide-react'
+import { ArrowLeft, TrendingUp, Clock, Target, Upload } from 'lucide-react'
+import './WorkflowOptimizer.css'
 
 /**
  * Workflow Optimizer - Personalized workflow optimization
  */
 function WorkflowOptimizer() {
   return (
-    <div style={{ minHeight: '100vh', background: '#f9fafb' }}>
-      <header style={{
-        background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
-        color: 'white',
-        padding: '2rem',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-      }}>
-        <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'white', textDecoration: 'none', marginBottom: '1rem' }}>
+    <div className="workflow-container">
+      <header className="workflow-header">
+        <Link to="/" className="back-link">
           <ArrowLeft size={24} />
           Back to Dashboard
         </Link>
-        <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Workflow Optimizer</h1>
-        <p style={{ opacity: 0.9 }}>Personalized workflow optimization and efficiency tracking</p>
+        <h1>Workflow Optimizer</h1>
+        <p>Personalized workflow optimization and efficiency tracking</p>
       </header>
 
-      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
+      <main className="workflow-main">
         {/* Optimization Metrics */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
-          <div style={{ background: 'white', padding: '2rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)', textAlign: 'center' }}>
-            <Clock size={48} style={{ color: '#2563eb', margin: '0 auto 1rem' }} />
-            <div style={{ fontSize: '2rem', fontWeight: 700, color: '#2563eb' }}>437.5 hrs</div>
-            <div style={{ color: '#6b7280', marginTop: '0.5rem' }}>Time Saved This Month</div>
+        <div className="metrics-overview">
+          <div className="metric-card">
+            <div className="metric-icon">
+              <Clock size={48} color="var(--accent-primary)" />
+            </div>
+            <div className="metric-value">437.5 hrs</div>
+            <div className="metric-label">Time Saved This Month</div>
           </div>
           
-          <div style={{ background: 'white', padding: '2rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)', textAlign: 'center' }}>
-            <Target size={48} style={{ color: '#2563eb', margin: '0 auto 1rem' }} />
-            <div style={{ fontSize: '2rem', fontWeight: 700, color: '#2563eb' }}>85%</div>
-            <div style={{ color: '#6b7280', marginTop: '0.5rem' }}>Workflow Efficiency</div>
+          <div className="metric-card">
+            <div className="metric-icon">
+              <Target size={48} color="var(--accent-primary)" />
+            </div>
+            <div className="metric-value">85%</div>
+            <div className="metric-label">Workflow Efficiency</div>
           </div>
           
-          <div style={{ background: 'white', padding: '2rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)', textAlign: 'center' }}>
-            <TrendingUp size={48} style={{ color: '#16a34a', margin: '0 auto 1rem' }} />
-            <div style={{ fontSize: '2rem', fontWeight: 700, color: '#16a34a' }}>+23%</div>
-            <div style={{ color: '#6b7280', marginTop: '0.5rem' }}>Productivity Increase</div>
+          <div className="metric-card">
+            <div className="metric-icon">
+              <TrendingUp size={48} color="var(--success)" />
+            </div>
+            <div className="metric-value">+23%</div>
+            <div className="metric-label">Productivity Increase</div>
           </div>
         </div>
 
         {/* Batch Processing */}
-        <div style={{ background: 'white', padding: '2rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)', marginBottom: '2rem' }}>
-          <h2 style={{ marginBottom: '1.5rem' }}>Batch Document Processing</h2>
-          <p style={{ color: '#6b7280', marginBottom: '1.5rem' }}>
+        <div className="workflow-card batch-processing-section">
+          <h2>Batch Document Processing</h2>
+          <p>
             Process multiple related documents simultaneously with cross-reference analysis.
             Optimized for contract negotiations, case file review, and multi-document research.
           </p>
           
-          <button style={{
-            padding: '1rem 2rem',
-            background: '#2563eb',
-            color: 'white',
-            border: 'none',
-            borderRadius: '6px',
-            fontSize: '1rem',
-            fontWeight: 600,
-            cursor: 'pointer'
-          }}>
-            Upload Document Set
-          </button>
+          <div className="file-upload-area">
+            <Upload size={48} />
+            <p>Click to upload documents or drag and drop</p>
+            <p style={{ fontSize: '0.875rem', marginTop: '0.5rem', color: 'var(--text-tertiary)' }}>
+              Supports PDF, DOC, DOCX • Max 20 files at once
+            </p>
+          </div>
+
+          <div className="stats-grid">
+            <div className="stat-item">
+              <div className="stat-value">156</div>
+              <div className="stat-label">Batches Processed</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-value">2,847</div>
+              <div className="stat-label">Total Documents</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-value">92%</div>
+              <div className="stat-label">Accuracy Rate</div>
+            </div>
+          </div>
         </div>
 
         {/* Document Comparison */}
-        <div style={{ background: 'white', padding: '2rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)', marginBottom: '2rem' }}>
-          <h2 style={{ marginBottom: '1.5rem' }}>Document Comparison Tool</h2>
-          <p style={{ color: '#6b7280', marginBottom: '1.5rem' }}>
+        <div className="workflow-card comparison-section">
+          <h2>Document Comparison Tool</h2>
+          <p>
             Advanced document comparison with detailed redlining and legal analysis of changes.
             Perfect for contract negotiation workflows.
           </p>
           
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-            <button style={{
-              padding: '1rem',
-              background: '#f0f9ff',
-              color: '#2563eb',
-              border: '2px solid #2563eb',
-              borderRadius: '6px',
-              cursor: 'pointer'
-            }}>
+          <div className="button-grid">
+            <button className="workflow-button secondary">
+              <Upload size={18} style={{ display: 'inline', marginRight: '0.5rem', verticalAlign: 'middle' }} />
               Upload Original Document
             </button>
-            <button style={{
-              padding: '1rem',
-              background: '#f0f9ff',
-              color: '#2563eb',
-              border: '2px solid #2563eb',
-              borderRadius: '6px',
-              cursor: 'pointer'
-            }}>
+            <button className="workflow-button secondary">
+              <Upload size={18} style={{ display: 'inline', marginRight: '0.5rem', verticalAlign: 'middle' }} />
               Upload Modified Document
             </button>
+          </div>
+
+          <div className="stats-grid" style={{ marginTop: '1.5rem' }}>
+            <div className="stat-item">
+              <div className="stat-value">89</div>
+              <div className="stat-label">Comparisons Run</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-value">1,234</div>
+              <div className="stat-label">Changes Detected</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-value">65%</div>
+              <div className="stat-label">Time Saved</div>
+            </div>
           </div>
         </div>
 
         {/* Optimization Insights */}
-        <div style={{ background: 'white', padding: '2rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)' }}>
-          <h2 style={{ marginBottom: '1.5rem' }}>Workflow Optimization Insights</h2>
+        <div className="insights-card">
+          <h2>Workflow Optimization Insights</h2>
           
-          <div style={{ padding: '1rem', background: '#f0fdf4', borderLeft: '4px solid #16a34a', borderRadius: '4px', marginBottom: '1rem' }}>
-            <strong style={{ color: '#16a34a' }}>Most Efficient Task:</strong>
-            <p style={{ marginTop: '0.5rem' }}>Document interpretation - 70% time reduction compared to manual review</p>
+          <div className="insight-item success">
+            <strong>Most Efficient Task</strong>
+            <p>Document interpretation - 70% time reduction compared to manual review</p>
           </div>
           
-          <div style={{ padding: '1rem', background: '#fef3c7', borderLeft: '4px solid #d97706', borderRadius: '4px', marginBottom: '1rem' }}>
-            <strong style={{ color: '#d97706' }}>Optimization Opportunity:</strong>
-            <p style={{ marginTop: '0.5rem' }}>Consider batch processing related contracts to save additional 15% time</p>
+          <div className="insight-item warning">
+            <strong>Optimization Opportunity</strong>
+            <p>Consider batch processing related contracts to save additional 15% time</p>
           </div>
           
-          <div style={{ padding: '1rem', background: '#f0f9ff', borderLeft: '4px solid #2563eb', borderRadius: '4px' }}>
-            <strong style={{ color: '#2563eb' }}>Recommendation:</strong>
-            <p style={{ marginTop: '0.5rem' }}>Enable automated citation validation to improve accuracy by 25%</p>
+          <div className="insight-item info">
+            <strong>Recommendation</strong>
+            <p>Enable automated citation validation to improve accuracy by 25%</p>
+          </div>
+
+          <div className="insight-item success">
+            <strong>Recent Achievement</strong>
+            <p>Processed 45 documents this week - 3x faster than average</p>
           </div>
         </div>
       </main>
