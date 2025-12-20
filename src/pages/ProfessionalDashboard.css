@@ -1,24 +1,52 @@
 .dashboard-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: var(--bg-primary);
+  animation: fadeIn var(--transition-slow) ease-out;
 }
 
 .dashboard-header {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  color: white;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  border-bottom: 1px solid var(--border-default);
+  color: var(--text-primary);
+  padding: 3rem 2rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+  pointer-events: none;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .header-content h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 0.75rem;
   font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .tagline {
-  font-size: 1.1rem;
-  opacity: 0.9;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  font-weight: 400;
 }
 
 .dashboard-main {
@@ -30,95 +58,170 @@
 .metrics-section,
 .tools-section,
 .actions-section {
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
+  animation: slideIn var(--transition-base) ease-out;
 }
 
 .metrics-section h2,
 .tools-section h2,
 .actions-section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  color: #1f2937;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.metrics-section h2::before,
+.tools-section h2::before,
+.actions-section h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 80%;
+  background: linear-gradient(180deg, var(--accent-primary) 0%, var(--text-tertiary) 100%);
+  border-radius: 2px;
 }
 
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
 }
 
 .metric-card {
-  background: white;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-md);
   text-align: center;
-  transition: transform 0.2s;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  animation: scaleIn var(--transition-slow) ease-out;
+  animation-fill-mode: both;
+}
+
+.metric-card:nth-child(1) { animation-delay: 0ms; }
+.metric-card:nth-child(2) { animation-delay: 100ms; }
+.metric-card:nth-child(3) { animation-delay: 200ms; }
+.metric-card:nth-child(4) { animation-delay: 300ms; }
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transition: left var(--transition-slow);
 }
 
 .metric-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--border-strong);
+}
+
+.metric-card:hover::before {
+  left: 100%;
 }
 
 .metric-value {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
-  color: #2563eb;
-  margin-bottom: 0.5rem;
+  color: var(--accent-primary);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
 }
 
 .metric-label {
   font-size: 1rem;
-  color: #6b7280;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
 }
 
 .tool-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-md);
   text-decoration: none;
   color: inherit;
-  transition: all 0.2s;
+  transition: all var(--transition-base);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
 }
 
 .tool-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--border-strong);
+}
+
+.tool-card:hover::before {
+  opacity: 1;
 }
 
 .tool-card svg {
-  color: #2563eb;
-  margin-bottom: 1rem;
+  color: var(--accent-primary);
+  margin-bottom: 1.5rem;
+  transition: all var(--transition-base);
+  filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.15));
+}
+
+.tool-card:hover svg {
+  transform: scale(1.1) translateY(-4px);
 }
 
 .tool-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.75rem;
-  color: #1f2937;
+  font-size: 1.375rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .tool-card p {
-  font-size: 0.95rem;
-  color: #6b7280;
-  line-height: 1.5;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
 
 .actions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
 }
 
@@ -128,25 +231,61 @@
   justify-content: center;
   gap: 0.75rem;
   padding: 1.25rem 1.5rem;
-  background: white;
-  color: #2563eb;
-  border: 2px solid #2563eb;
-  border-radius: 8px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.action-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width var(--transition-base), height var(--transition-base);
 }
 
 .action-button:hover {
-  background: #2563eb;
-  color: white;
+  background: var(--bg-elevated);
+  color: var(--accent-primary);
+  border-color: var(--border-strong);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.action-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.action-button svg {
+  transition: transform var(--transition-base);
+  z-index: 1;
+}
+
+.action-button:hover svg {
+  transform: scale(1.15);
+}
+
+.action-button span {
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
   .dashboard-header {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
   }
 
   .header-content h1 {
@@ -158,12 +297,23 @@
   }
 
   .dashboard-main {
-    padding: 1rem;
+    padding: 1.5rem 1rem;
   }
 
   .metrics-grid,
   .tools-grid,
   .actions-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .metric-card,
+  .tool-card {
+    padding: 1.5rem;
+  }
+  
+  .metrics-section h2::before,
+  .tools-section h2::before,
+  .actions-section h2::before {
+    width: 3px;
   }
 }
