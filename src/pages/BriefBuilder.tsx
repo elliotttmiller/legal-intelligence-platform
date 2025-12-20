@@ -26,7 +26,7 @@ const mockAnalysis = {
   weaknesses: [
     'Opposing counsel may argue good faith exception applies',
     'Recent circuit split on similar fact patterns could create uncertainty',
-    'Need to address potential distinguish ing factors more thoroughly'
+    'Need to address potential distinguishing factors more thoroughly'
   ],
   suggestions: [
     'Add analysis of recent Supreme Court decisions on digital searches',

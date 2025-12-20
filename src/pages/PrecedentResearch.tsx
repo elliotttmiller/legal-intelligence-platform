@@ -187,11 +187,7 @@ function PrecedentResearch() {
                     {caseItem.binding ? 'Binding Authority' : 'Persuasive Authority'}
                   </span>
                   {caseItem.legalPrinciples.slice(0, 2).map((principle, idx) => (
-                    <span key={idx} className="tag" style={{ 
-                      background: 'rgba(255, 255, 255, 0.05)', 
-                      color: 'var(--text-secondary)',
-                      border: '1px solid var(--border-default)'
-                    }}>
+                    <span key={idx} className="tag tag-principle">
                       {principle}
                     </span>
                   ))}
